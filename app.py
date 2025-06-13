@@ -6,15 +6,15 @@ import requests
 
 st.set_page_config(page_title="Ask Your Python Code", layout="wide",page_icon="download.jpeg")
 
-# Load embedding model
+# load embedding model "MiniLM-L6-V2
 model = SentenceTransformer("all-MiniLM-L6-v2")
 
-# Functions
+# function to split python code to chunks based on Classes and functions
 def split_python_code(code: str):
     import re
     pattern = re.compile(r"(def .+?:|class .+?:)")
-    lines = code.splitlines()
-    chunks = []
+    lines = code.splitlines() # to split the code into single lines
+    chunks = [] #list to store final chunks
     buffer = []
 
     for line in lines:
@@ -27,17 +27,20 @@ def split_python_code(code: str):
         chunks.append("\n".join(buffer))
     return chunks
 
+#function to generate embeddings for the chunks and index them using FAISS
 def embed_chunks(chunks):
     embeddings = model.encode(chunks)
     index = faiss.IndexFlatL2(embeddings.shape[1])
     index.add(np.array(embeddings))
     return index, embeddings
 
+#function that will search top relevent code chunks for the query
 def search_chunks(query, chunks, index):
     query_vec = model.encode([query])
     _, I = index.search(query_vec, k=3)
     return [chunks[i] for i in I[0]]
 
+#function to send the selected context and questions to LLAMA for answers 
 def ask_llama(context, question):
     prompt = f"""You are a helpful AI assistant that answers questions about Python code.
 
@@ -49,6 +52,7 @@ Question:
 
 Answer:"""
 
+    #sending prompt to local LLAMA api
     response = requests.post(
         "http://localhost:11434/api/generate",
         json={"model": "llama3", "prompt": prompt, "stream": False}
@@ -56,7 +60,7 @@ Answer:"""
 
     return response.json()["response"]
 
-# UI
+#User Interface - UI
 st.title("🐍 Ask Your Python Code (LLaMA RAG)")
 code =None
 code_input_method = st.radio("Choose Input Method:", ["Upload .py File", "Paste Code"])
@@ -77,6 +81,6 @@ if code:
     if question:
         relevant_chunks = search_chunks(question, chunks, index)
         context = "\n\n".join(relevant_chunks)
-        answer = ask_llama(context, question)
-        st.markdown("### 🤖 Answer")
+        answer = ask_llama(context, question) #getting answer from LLAMA
+        st.markdown("### 🤖 Answer") Displaying the answer
         st.write(answer)
