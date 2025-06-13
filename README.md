@@ -27,18 +27,22 @@ Python, Streamlit, SentenceTransformers, FAISS, Graphviz, NetworkX, Matplotlib, 
 1) To run the code, go to the terminal and enter command -
    ### `streamlit run app.py`
    After running, the below screen is displayed
-   ![Screenshot 2025-06-13 132719](https://github.com/user-attachments/assets/36d0e043-7a5f-453a-b286-10bbecbee905)
+   ![Screenshot 2025-06-13 141304](https://github.com/user-attachments/assets/a427442e-cabf-427a-8bb8-1355fa708af0)
+
    ###
 2) Options like uploading a file or pasting your code can be done
    ###
-   ![Screenshot 2025-06-13 132914](https://github.com/user-attachments/assets/b3b408d4-9633-4c35-b435-7e2786254653)
+   ![Screenshot 2025-06-13 141427](https://github.com/user-attachments/assets/b882fac3-c203-4d3f-aa19-5269e3729d65)
+
   ###
-3) After uploading or pasting the code and pressing Enter, the code will be processed. After which one can ask further questions about the code
+3) After uploading or pasting the code and pressing Enter, the code will be processed. After which, one can ask further questions about the code
    ###
-  ![Screenshot 2025-06-13 132944](https://github.com/user-attachments/assets/6dbb6a1e-f715-407c-b370-9f7dec101070)
+   ![Screenshot 2025-06-13 141540](https://github.com/user-attachments/assets/4741fc85-2360-474a-8cb9-51506b8935d6)
+
   ###
-4) Response will be displayed on the screen
+4) The response will be displayed on the screen
    ###
-   ![Screenshot 2025-06-13 133056](https://github.com/user-attachments/assets/f8acec41-11af-4b8f-91f2-65602c683a1e)
+   ![Screenshot 2025-06-13 141639](https://github.com/user-attachments/assets/3475c399-98fd-43d9-beed-6224874d7609)
+
 
 
